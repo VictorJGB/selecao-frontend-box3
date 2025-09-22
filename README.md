@@ -67,3 +67,8 @@ export default defineConfig([
   },
 ])
 ```
+## Challenge Info
+
+- GUARDIA MARIA API DOCS: https://beta.guardia-api.box3.work/swagger/index.html
+- GUARDIA MARIA API URL: https://beta.guardia-api.box3.work/api
+- CHALLENGE INSTRUCTIONS: https://profuse-skull-802.notion.site/Sele-o-Front-End-Box3-GuardiaMaria-API-21dd2a42d51480e6b5e4c547258441ff
