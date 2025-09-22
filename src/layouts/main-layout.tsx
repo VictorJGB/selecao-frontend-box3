@@ -1,13 +1,11 @@
 import { Outlet } from "react-router-dom";
 
+import Header from "../components/header";
+
 export default function MainLayout() {
   return (
     <div className="flex flex-col items-center justify-center h-screen w-full">
-      <header className="w-full h-40 flex items-center justify-between px-20">
-        <h1>Guard Maria</h1>
-
-        <nav>links</nav>
-      </header>
+      <Header />
       <main className="flex size-full px-20">
         <Outlet />
       </main>
