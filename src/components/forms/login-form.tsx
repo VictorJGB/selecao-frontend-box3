@@ -2,8 +2,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
 
-import { Eye, EyeClosed } from "lucide-react";
+import { Eye, EyeClosed, Loader2 } from "lucide-react";
 import { useState } from "react";
+import useLogin from "../../hooks/use-login";
 import Button from "../button";
 import Input from "../input";
 import Label from "../label";
@@ -18,6 +19,7 @@ type LoginSchema = z.infer<typeof formSchema>;
 
 export default function LoginForm() {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false)
+  const { data, error, isLoading, submitLogin } = useLogin()
 
   const {
     register,
@@ -27,8 +29,9 @@ export default function LoginForm() {
     resolver: zodResolver(formSchema),
   })
 
-  function submitLogin(values: LoginSchema) {
-    console.log(values)
+  async function Login(values: LoginSchema) {
+    await submitLogin(values.email, values.password)
+    console.log(data)
   }
 
   function togglePasswordVisibility() {
@@ -46,7 +49,7 @@ export default function LoginForm() {
 
       {/* form */}
       <form
-        onSubmit={handleSubmit(submitLogin)}
+        onSubmit={handleSubmit(Login)}
         className="w-full grid grid-rows-3 grid-cols-1 gap-4 items-center justify-start"
       >
         <div className="grid gap-2">
@@ -54,6 +57,7 @@ export default function LoginForm() {
           <Input
             type="email"
             {...register("email")}
+            disabled={isLoading}
           />
           <FormError errMessage={errors.email?.message} />
         </div>
@@ -63,6 +67,7 @@ export default function LoginForm() {
             <Input
               id="password"
               type={isPasswordVisible ? "text" : "password"}
+              disabled={isLoading}
               {...register("password")}
             />
             {isPasswordVisible && <Eye className="absolute size-4 right-3 cursor-pointer text-primary" onClick={togglePasswordVisibility} />}
@@ -71,7 +76,10 @@ export default function LoginForm() {
           <FormError errMessage={errors.password?.message} />
         </div>
 
-        <Button className="w-full" type="submit">Acessar</Button>
+        <Button className="w-full" type="submit" disabled={isLoading}>
+          {!isLoading ? "Acessar" : "Acessando..."}
+          {isLoading && <Loader2 className="ml-2 size-4 animate-spin" />}
+        </Button>
       </form>
     </div>
   )
