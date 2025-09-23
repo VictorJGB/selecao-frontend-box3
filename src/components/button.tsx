@@ -10,10 +10,10 @@ type ButtonProps = {
 };
 
 const buttonVariants = {
-  default: "bg-base-300 text-foreground",
-  primary: "bg-primary text-primary-foreground",
-  secondary: "bg-secondary text-secondary-foreground",
-  destructive: "bg-destructive text-destructive-foreground",
+  default: "bg-base-300 hover:bg-base-300/80 text-foreground",
+  primary: "bg-primary hover:bg-primary/80 text-primary-foreground",
+  secondary: "bg-secondary bg-secondary/80 text-secondary-foreground",
+  destructive: "bg-destructive bg-destructive/80 text-destructive-foreground",
 };
 
 export default function Button({
@@ -24,7 +24,7 @@ export default function Button({
   return (
     <button
       className={cn(
-        "h-9 px-4 py-2 flex items-center justify-center gap-2 rounded cursor-pointer",
+        "h-9 px-4 py-2 flex items-center justify-center gap-2 rounded-lg font-semibold cursor-pointer transition-colors disabled:opacity-50 disabled:pointer-events-none",
         buttonVariants[variant],
         className
       )}

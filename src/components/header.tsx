@@ -1,5 +1,5 @@
 import { ShieldAlert } from "lucide-react";
-import { NavLink, Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Button from "./button";
 
 export default function Header() {
@@ -38,7 +38,7 @@ export default function Header() {
           </li>
           <li>
             <NavLink to={"/login"}>
-              <Button>Sair</Button>
+              <Button variant="primary">Logout</Button>
             </NavLink>
           </li>
         </ul>
