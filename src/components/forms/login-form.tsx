@@ -1,14 +1,18 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import z from "zod";
+import FormError from "./form-error";
 
 import { Eye, EyeClosed, Loader2 } from "lucide-react";
-import { useState } from "react";
-import useLogin from "../../hooks/use-login";
+import { toast } from "react-toastify";
 import Button from "../button";
 import Input from "../input";
 import Label from "../label";
-import FormError from "./form-error";
+
+import useLogin from "../../hooks/use-login";
 
 const formSchema = z.object({
   email: z.email({ error: "Digite um email válido" }).min(1),
@@ -18,8 +22,9 @@ const formSchema = z.object({
 type LoginSchema = z.infer<typeof formSchema>;
 
 export default function LoginForm() {
+  const navigate = useNavigate()
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false)
-  const { data, error, isLoading, submitLogin } = useLogin()
+  const { isLoading, submitLogin } = useLogin()
 
   const {
     register,
@@ -31,7 +36,13 @@ export default function LoginForm() {
 
   async function Login(values: LoginSchema) {
     await submitLogin(values.email, values.password)
-    console.log(data)
+      .then(() => {
+        toast.success("Login realizado com sucesso")
+        navigate("/")
+      })
+      .catch((e) => {
+        toast.error(e.message)
+      })
   }
 
   function togglePasswordVisibility() {

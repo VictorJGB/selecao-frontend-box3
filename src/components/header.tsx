@@ -1,8 +1,11 @@
 import { ShieldAlert } from "lucide-react";
 import { Link, NavLink } from "react-router-dom";
+import useLocalStorage from "../hooks/use-local-storage";
 import Button from "./button";
 
 export default function Header() {
+  const { removeKey } = useLocalStorage('AUTH_TOKEN')
+
   return (
     <header className="w-full h-24 bg-base-100 flex items-center justify-between px-20 shadow-sm">
       <Link
@@ -37,7 +40,7 @@ export default function Header() {
             </NavLink>
           </li>
           <li>
-            <NavLink to={"/login"}>
+            <NavLink to={"/login"} onClick={removeKey}>
               <Button variant="primary">Logout</Button>
             </NavLink>
           </li>
