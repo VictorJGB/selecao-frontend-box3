@@ -38,6 +38,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   }
 );
 
-Button.displayName = "Button"; // evita warning no React DevTools
+Button.displayName = "Button";
 
 export default Button;
