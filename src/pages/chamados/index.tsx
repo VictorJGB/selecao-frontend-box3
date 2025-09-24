@@ -1,4 +1,5 @@
 import { CirclePlus } from "lucide-react";
+import { Link } from "react-router-dom";
 import Button from "../../components/button";
 import DataTable, { type Column } from "../../components/data-table";
 import Input from "../../components/input";
@@ -63,14 +64,16 @@ export default function ChamadosPage() {
         <h3 className="text-lg text-neutral">Consulte informações sobre seus chamados</h3>
       </div>
 
-      <div className="h-full container flex flex-col items-center mx-auto gap-2">
+      <div className="h-full container flex flex-col items-center mx-auto gap-4">
         {/* actions */}
         <div className="w-full flex flex-col lg:flex-row items-center justify-center lg:justify-between">
           <Input className="w-2/5" placeholder="Pesquise por um chamado" />
-          <Button>
-            Novo chamado
-            <CirclePlus className="size-4 ml-2" />
-          </Button>
+          <Link to={"/chamados/novo"}>
+            <Button>
+              Abrir chamado
+              <CirclePlus className="size-4 ml-2" />
+            </Button>
+          </Link>
         </div>
         <div className="w-full mx-auto">
           <DataTable columns={columns} data={data} />
