@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import { CirclePlus } from "lucide-react";
 
@@ -11,8 +11,10 @@ import { chamadosTableColumns } from "../../components/data-table/chamados-colum
 import TableSkeleton from "../../components/data-table/table-skeleton";
 
 import useChamados from "../../hooks/use-chamados";
+import type { Chamado } from "../../types/chamados";
 
 export default function ChamadosPage() {
+  const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const currentPage = searchParams.get('currentPage') ?? "1"
   const pageSize = searchParams.get('pageSize') ?? "10"
@@ -22,7 +24,9 @@ export default function ChamadosPage() {
     if (error) toast.error(error.message);
   }, [error]);
 
-
+  function onRowClick(item: Chamado) {
+    navigate(`/chamados/${item.id}`)
+  }
 
   return (
     <div className="size-full flex flex-col items-center gap-12">
@@ -52,6 +56,7 @@ export default function ChamadosPage() {
             <DataTable
               columns={chamadosTableColumns}
               data={data.dados.dados}
+              onRowClick={onRowClick}
               currentPage={currentPage}
               pageSize={pageSize}
               totalPages={data.dados.totalPages - 1}

@@ -17,7 +17,7 @@ type DataTableProps<T> = {
   totalRegisters: number | null
 };
 
-export default function DataTable<T>({ data, columns, currentPage, pageSize, totalPages, totalRegisters }: DataTableProps<T>) {
+export default function DataTable<T>({ data, columns, onRowClick, currentPage, pageSize, totalPages, totalRegisters }: DataTableProps<T>) {
   return (
     <div className="size-full flex flex-col gap-4">
       <div className="size-full max-h-[600px] rounded-md border border-neutral overflow-hidden overflow-y-auto">
@@ -39,6 +39,7 @@ export default function DataTable<T>({ data, columns, currentPage, pageSize, tot
               <tr
                 key={index}
                 className="border-b transition-colors hover:bg-primary/50 cursor-pointer data-[state=selected]:bg-muted"
+                onClick={onRowClick ? () => onRowClick(item) : undefined}
               >
                 {columns.map((column, idx) => (
                   <td
