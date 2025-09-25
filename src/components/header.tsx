@@ -9,13 +9,13 @@ export default function Header() {
   return (
     <header className="w-full h-24 bg-base-100 flex items-center justify-between px-20 shadow-sm">
       <div
-        className="text-primary text-xl flex items-center justify-center gap-1"
+        className=" text-primary text-xl flex items-center justify-center gap-1"
       >
         <h1 className="font-bold ">Guardia Maria</h1>
         <ShieldAlert />
       </div>
 
-      <nav>
+      <nav className="hidden lg:flex">
         <ul className="flex items-center justify-center gap-4">
           <li>
             <NavLink

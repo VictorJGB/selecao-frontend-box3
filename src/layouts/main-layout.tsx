@@ -18,7 +18,7 @@ export default function MainLayout() {
   return (
     <div className="flex flex-col items-center justify-center h-screen w-full">
       <Header />
-      <main className="flex size-full px-20 py-10">
+      <main className="flex size-full px-6 lg:px-20 py-10">
         <Outlet />
       </main>
     </div>
