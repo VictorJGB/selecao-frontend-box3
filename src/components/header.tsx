@@ -4,22 +4,20 @@ import useLocalStorage from "../hooks/use-local-storage";
 import Button from "./button";
 
 export default function Header() {
-  const { removeKey } = useLocalStorage('AUTH_TOKEN')
+  const { removeKey } = useLocalStorage("AUTH_TOKEN");
 
   return (
-    <header className="w-full h-24 bg-base-100 flex items-center justify-between px-20 shadow-sm">
-      <div
-        className=" text-primary text-xl flex items-center justify-center gap-1"
-      >
+    <header className="w-full h-20 bg-base-100 flex items-center justify-between px-20 shadow-sm">
+      <div className=" text-primary text-xl flex items-center justify-center gap-1">
         <h1 className="font-bold ">Guardia Maria</h1>
         <ShieldAlert />
       </div>
 
-      <nav className="hidden lg:flex">
+      <nav>
         <ul className="flex items-center justify-center gap-4">
           <li>
             <NavLink
-              to={"/chamados?currentPage=1&pageSize=10"}
+              to={"/chamados"}
               className="hover:text-primary transition-colors"
             >
               Chamados

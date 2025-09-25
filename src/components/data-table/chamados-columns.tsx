@@ -1,6 +1,7 @@
 import type { Column } from ".";
 import type { Chamado } from "../../types/chamados";
 import formatDateToPTBR from "../../utils/format-date";
+import Badge from "../badge";
 
 export const chamadosTableColumns: Column<Chamado>[] = [
   {
@@ -19,6 +20,19 @@ export const chamadosTableColumns: Column<Chamado>[] = [
   {
     accessor: "status",
     header: "Status",
-    cell: (row) => <p>{row.status.label}</p>,
+    cell: (row) => (
+      <Badge
+        className="text-xs"
+        variant={
+          row.status.value.toLowerCase() === "finalizado"
+            ? "success"
+            : row.status.value.toLowerCase() === "rejeitado"
+            ? "destructive"
+            : "warning"
+        }
+      >
+        {row.status.label}
+      </Badge>
+    ),
   },
 ];

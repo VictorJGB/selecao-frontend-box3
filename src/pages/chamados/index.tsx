@@ -14,22 +14,29 @@ import useChamados from "../../hooks/use-chamados";
 import type { Chamado } from "../../types/chamados";
 
 export default function ChamadosPage() {
-  const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
-  const currentPage = searchParams.get('currentPage') ?? "1"
-  const pageSize = searchParams.get('pageSize') ?? "10"
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentPage = searchParams.get("currentPage") ?? "1";
+  const pageSize = searchParams.get("pageSize") ?? "5";
   const { data, error, isLoading } = useChamados(currentPage, pageSize);
 
   useEffect(() => {
+    if (!searchParams.get("pageSize") && !searchParams.get("currentPage")) {
+      setSearchParams({
+        currentPage: "1",
+        pageSize: "5",
+      });
+    }
+
     if (error) toast.error(error.message);
-  }, [error]);
+  }, [error, searchParams, setSearchParams]);
 
   function onRowClick(item: Chamado) {
-    navigate(`/chamados/${item.id}`)
+    navigate(`/chamados/${item.id}`);
   }
 
   return (
-    <div className="size-full flex flex-col items-center gap-12">
+    <div className="size-full flex flex-col items-center gap-6">
       <div className="w-full flex flex-col items-center justify-start gap-3">
         <h1 className="text-3xl font-bold ">Listagem de chamados</h1>
         <h3 className="text-lg text-neutral">
