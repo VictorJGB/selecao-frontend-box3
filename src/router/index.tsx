@@ -20,6 +20,7 @@ const router = createBrowserRouter([
       {
         path: "/chamados",
         element: <ChamadosPage />,
+
       },
       {
         path: "/chamados/novo",

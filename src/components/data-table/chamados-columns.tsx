@@ -1,6 +1,6 @@
+import type { Column } from ".";
 import type { Chamado } from "../../types/chamados";
 import formatDateToPTBR from "../../utils/format-date";
-import type { Column } from "../data-table";
 
 export const chamadosTableColumns: Column<Chamado>[] = [
   {

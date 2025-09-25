@@ -1,25 +1,21 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import type { ChamadoAPIReturn } from "../types/chamados";
 import { apiFetcher } from "../utils/api";
 import useLocalStorage from "./use-local-storage";
 
-export default function useChamados(currentPage: string | null, pageSize: string | null) {
+export default function useLogado() {
   const { getKey } = useLocalStorage("AUTH_TOKEN");
 
   const [data, setData] = useState<ChamadoAPIReturn | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
-  const getChamados = useCallback(async () => {
+  const getIsLogado = useCallback(async () => {
     setIsLoading(true);
 
     try {
-      const response = await apiFetcher.post<ChamadoAPIReturn>(
-        "/Chamado/listagem",
-        {
-          currentPage: currentPage ? Number(currentPage) : 1,
-          pageSize: pageSize ? Number(pageSize) : 10,
-        },
+      const response = await apiFetcher.get(
+        "/Auth/Logado",
         {
           headers: {
             Authorization: `Bearer ${getKey() ?? ""}`,
@@ -28,16 +24,15 @@ export default function useChamados(currentPage: string | null, pageSize: string
       );
       const data = response.data;
       setData(data);
+
+      console.log({ logData: data })
     } catch (e) {
       if (e instanceof Error) setError(e);
     } finally {
       setIsLoading(false);
     }
-  }, [currentPage, pageSize]);
+  }, []);
 
-  useEffect(() => {
-    getChamados();
-  }, [getChamados]);
 
-  return { data, isLoading, error, refetch: getChamados };
+  return { data, isLoading, error, verifyToken: getIsLogado };
 }

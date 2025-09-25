@@ -25,7 +25,7 @@ export default function Header() {
           </li>
           <li>
             <NavLink
-              to={"/chamados"}
+              to={"/chamados?currentPage=1&pageSize=10"}
               className="hover:text-primary transition-colors"
             >
               Chamados
