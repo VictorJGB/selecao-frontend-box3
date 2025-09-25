@@ -1,5 +1,5 @@
 import { ShieldAlert } from "lucide-react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import useLocalStorage from "../hooks/use-local-storage";
 import Button from "./button";
 
@@ -8,21 +8,15 @@ export default function Header() {
 
   return (
     <header className="w-full h-24 bg-base-100 flex items-center justify-between px-20 shadow-sm">
-      <Link
-        to={"/"}
+      <div
         className="text-primary text-xl flex items-center justify-center gap-1"
       >
         <h1 className="font-bold ">Guardia Maria</h1>
         <ShieldAlert />
-      </Link>
+      </div>
 
       <nav>
         <ul className="flex items-center justify-center gap-4">
-          <li>
-            <NavLink to={"/"} className="hover:text-primary transition-colors">
-              Início
-            </NavLink>
-          </li>
           <li>
             <NavLink
               to={"/chamados?currentPage=1&pageSize=10"}
