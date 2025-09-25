@@ -1,20 +1,25 @@
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import { useState } from 'react';
-import { cn } from '../utils/tw-merge';
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { useState } from "react";
+import { cn } from "../utils/tw-merge";
 
-interface SelectOption {
+export type SelectOption = {
   value: string | number;
   label: string;
-}
+};
 
-interface SelectProps {
+type SelectProps = {
   options: SelectOption[];
   value: string | number;
   onSelect: (value: string | number) => void;
-  className?: string
-}
+  className?: string;
+};
 
-export default function Select({ options, value, onSelect, className }: SelectProps) {
+export default function Select({
+  options,
+  value,
+  onSelect,
+  className,
+}: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSelect = (selectedValue: string | number) => {
@@ -30,12 +35,21 @@ export default function Select({ options, value, onSelect, className }: SelectPr
         onClick={() => setIsOpen(!isOpen)}
       >
         {value}
-        {isOpen ? <ChevronUp className="-mr-1 ml-2 h-5 w-5" /> : <ChevronDown className="-mr-1 ml-2 h-5 w-5" />}
+        {isOpen ? (
+          <ChevronUp className="-mr-1 ml-2 h-5 w-5" />
+        ) : (
+          <ChevronDown className="-mr-1 ml-2 h-5 w-5" />
+        )}
       </button>
 
       {isOpen && (
         <div className="origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-          <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+          <div
+            className="py-1"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="options-menu"
+          >
             {options.map((option) => (
               <button
                 key={option.value}

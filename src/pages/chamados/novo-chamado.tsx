@@ -1,14 +1,15 @@
-import { ArrowLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import ChamadoForm from "../../components/forms/chamado-form";
 
 export default function NovoChamadoPage() {
   return (
-    <div>
-      <h1>Novo chamado</h1>
-      <Link to={"/chamados"} className="flex items-center justify-center gap-2 text-primary">
-        <ArrowLeft className="size-4" />
-        Voltar para listagem
-      </Link>
+    <div className="size-full flex flex-col py-4 items-center justify-center gap-4">
+      <h1 className="text-xl md:text-3xl text-primary-foreground font-semibold">
+        Cadastro de chamado
+      </h1>
+
+      <div className="w-full md:w-3/5 flex bg-base-100 items-center justify-center border-2 border-primary rounded-2xl p-4">
+        <ChamadoForm />
+      </div>
     </div>
-  )
+  );
 }
