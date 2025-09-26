@@ -3,12 +3,12 @@ import { Link, useParams } from "react-router-dom";
 
 import { toast } from "react-toastify";
 
-import useChamadoPorId from "../../hooks/use-chamado-por-id";
-import formatDateToPTBR from "../../utils/format-date";
 import { ArrowLeft } from "lucide-react";
 import Badge from "../../components/badge";
 import Button from "../../components/button";
 import InfoChamadoSkeleton from "../../components/skeletons/info-chamado-skeleton";
+import useChamadoPorId from "../../hooks/use-chamado-por-id";
+import formatDateToPTBR from "../../utils/format-date";
 
 export default function InfoChamadoPage() {
   const { id } = useParams();
@@ -42,8 +42,8 @@ export default function InfoChamadoPage() {
                   data.status.value.toLowerCase() === "finalizado"
                     ? "success"
                     : data.status.value.toLowerCase() === "rejeitado"
-                    ? "destructive"
-                    : "warning"
+                      ? "destructive"
+                      : "warning"
                 }
               >
                 {data.status.label}
@@ -90,11 +90,9 @@ export default function InfoChamadoPage() {
                 <span className="text-base text-neutral/80 font-bold">
                   Endereço do chamado
                 </span>
-                <span className="text-base lg:text-lg capitalize">{`${
-                  data.rua
-                }, ${data.numero ? data.numero : "S/N"}, ${data.bairro}, ${
-                  data.cidade
-                } - ${data.estado}`}</span>
+                <span className="text-base lg:text-lg capitalize">{`${data.rua
+                  }, ${data.numero ? data.numero : "S/N"}, ${data.bairro}, ${data.cidade
+                  } - ${data.estado}`}</span>
               </div>
               {/* CEP */}
               <div className="flex flex-col items-start justify-start gap-1">
