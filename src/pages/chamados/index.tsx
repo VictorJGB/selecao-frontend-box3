@@ -38,8 +38,8 @@ export default function ChamadosPage() {
   return (
     <div className="size-full flex flex-col items-center gap-6">
       <div className="w-full flex flex-col items-center justify-start gap-3">
-        <h1 className="text-3xl font-bold ">Listagem de chamados</h1>
-        <h3 className="text-lg text-neutral">
+        <h1 className="text-2xl md:text-3xl font-bold ">Listagem de chamados</h1>
+        <h3 className="text-base md:text-lg text-neutral">
           Consulte informações sobre seus chamados
         </h3>
       </div>
@@ -49,7 +49,7 @@ export default function ChamadosPage() {
         <div className="w-full flex flex-col lg:flex-row items-center justify-center lg:justify-between">
           {/* TO-DO: Implement input search logic */}
           {/* <Input className="w-2/5" placeholder="Pesquise por um chamado" /> */}
-          <Link to={"/chamados/novo"} className="ml-auto">
+          <Link to={"/chamados/novo"} className="md:ml-auto">
             <Button>
               Abrir chamado
               <CirclePlus className="size-4 ml-2" />

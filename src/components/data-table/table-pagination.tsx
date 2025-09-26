@@ -79,7 +79,7 @@ export default function TablePagination({ currentPage, pageSize, totalPages, tot
   }
 
   return (
-    <div className="flex w-full items-center justify-center">
+    <div className="flex w-full items-center justify-between md:justify-center">
       <Select
         options={[
           { value: totalRegisters > 5 ? 5 : totalRegisters, label: totalRegisters > 5 ? "5" : String(totalRegisters) },
@@ -90,13 +90,13 @@ export default function TablePagination({ currentPage, pageSize, totalPages, tot
       />
       <div className="flex items-center justify-center gap-3">
         <div className="flex items-center gap-1">
-          <Button variant="ghost" size="icon" disabled={!canGoFisrtPage()} onClick={goToFirstPage}><ChevronsLeft /></Button>
-          <Button variant="ghost" size="icon" disabled={!canGoPreviousPage()} onClick={goToPreviuousPage}><ChevronLeft /></Button>
+          <Button variant="ghost" className="px-0 md:px-2" size="icon" disabled={!canGoFisrtPage()} onClick={goToFirstPage}><ChevronsLeft /></Button>
+          <Button variant="ghost" className="px-0 md:px-2" size="icon" disabled={!canGoPreviousPage()} onClick={goToPreviuousPage}><ChevronLeft /></Button>
         </div>
         <p>Página {currentPage} de {totalPages}</p>
         <div className="flex items-center gap-1">
-          <Button variant="ghost" size="icon" disabled={!canGoNextPage()} onClick={goToNextPage}><ChevronRight /></Button>
-          <Button variant="ghost" size="icon" disabled={!canGoLastPage()} onClick={goToLastPage}><ChevronsRight /></Button>
+          <Button variant="ghost" className="px-0 md:px-2" size="icon" disabled={!canGoNextPage()} onClick={goToNextPage}><ChevronRight /></Button>
+          <Button variant="ghost" className="px-0 md:px-2" size="icon" disabled={!canGoLastPage()} onClick={goToLastPage}><ChevronsRight /></Button>
         </div>
       </div>
     </div>

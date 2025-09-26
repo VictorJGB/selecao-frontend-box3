@@ -26,7 +26,7 @@ export default function DataTable<T>({ data, columns, onRowClick, currentPage, p
             <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
               {columns.map((column) => (
                 <th
-                  className="h-12 px-4 text-left text-base align-middle font-bold text-primary-foreground"
+                  className="h-12 px-4 text-left text-sm md:text-base align-middle font-bold text-primary-foreground"
                   key={String(column.accessor)}
                 >
                   {column.header}
@@ -44,7 +44,7 @@ export default function DataTable<T>({ data, columns, onRowClick, currentPage, p
                 {columns.map((column, idx) => (
                   <td
                     key={idx}
-                    className="p-4 align-middle [&:has([role=checkbox])]:pr-0"
+                    className="py-4 px-2 align-middle [&:has([role=checkbox])]:pr-0"
                   >
                     {column.cell
                       ? column.cell(item)

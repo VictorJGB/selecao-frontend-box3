@@ -1,5 +1,5 @@
 import { Menu, ShieldAlert, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import useLocalStorage from "../hooks/use-local-storage";
 import Button from "./button";
@@ -9,7 +9,6 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    // Optional: Disable body scroll when menu is open
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -21,6 +20,11 @@ export default function Header() {
     setIsMenuOpen(false);
   };
 
+  function Logout() {
+    removeKey()
+    handleLinkClick()
+  }
+
   return (
     <header className="w-full h-20 bg-base-100 flex items-center justify-between px-4 sm:px-8 lg:px-20 shadow-sm relative z-20">
       <div className=" text-primary text-xl flex items-center justify-center gap-1">
@@ -28,7 +32,7 @@ export default function Header() {
         <ShieldAlert />
       </div>
 
-      {/* Desktop Nav */}
+      {/* Desktop*/}
       <nav className="hidden md:flex items-center gap-4">
         <NavLink
           to={"/chamados"}
@@ -47,9 +51,9 @@ export default function Header() {
         </NavLink>
       </nav>
 
-      {/* Mobile Menu Button */}
+      {/* Mobile Menu*/}
       <div className="md:hidden">
-        <button onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
           {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
@@ -62,11 +66,10 @@ export default function Header() {
 
       {/* Mobile Nav */}
       <nav
-        className={`absolute top-20 left-0 w-full bg-base-100 shadow-md md:hidden z-20 transition-all duration-300 ease-in-out ${
-          isMenuOpen
-            ? 'opacity-100 translate-y-0'
-            : 'opacity-0 -translate-y-4 pointer-events-none'
-        }`}
+        className={`absolute top-20 left-0 w-full bg-base-100 shadow-md md:hidden z-20 transition-all duration-300 ease-in-out ${isMenuOpen
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 -translate-y-4 pointer-events-none'
+          }`}
       >
         <ul className="flex flex-col items-center gap-6 py-8">
           <li>
@@ -88,7 +91,7 @@ export default function Header() {
             </NavLink>
           </li>
           <li>
-            <NavLink to={"/login"} onClick={() => { removeKey(); handleLinkClick(); }}>
+            <NavLink to={"/login"} onClick={Logout}>
               <Button variant="primary">Logout</Button>
             </NavLink>
           </li>
