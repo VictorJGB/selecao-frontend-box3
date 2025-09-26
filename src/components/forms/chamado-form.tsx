@@ -1,8 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { AxiosError } from "axios";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import z from "zod";
 import useBairroSelect from "../../hooks/use-bairro-select";
+import useCadastroChamado from "../../hooks/use-cadastro-chamado";
+import usePessoaAssistida from "../../hooks/use-pessoa-assistida";
 import usePessoaAssistidaSelect from "../../hooks/use-pessoa-assistida-select";
 import Button from "../button";
 import Input from "../input";
@@ -24,42 +28,71 @@ const formSchema = z.object({
 type FormSchema = z.infer<typeof formSchema>;
 
 export default function ChamadoForm() {
+  const navigate = useNavigate()
+
   const { data: pessoas, isLoading: isLoadingPessoas, error: pessoasError } = usePessoaAssistidaSelect()
   const { data: bairros, isLoading: isLoadingBairros, error: bairrosError } = useBairroSelect()
+  const { isLoading, submitCadastro, updateLoading: updateCadastroLoading } = useCadastroChamado()
+  const { isLoading: isLoadingPessoa, fetch, updateLoading: updatePessoaLoading } = usePessoaAssistida()
 
   const {
     register,
     formState: { errors },
     handleSubmit,
-    getValues,
     watch,
     setValue
   } = useForm({ resolver: zodResolver(formSchema) });
 
-  function submitChamado(values: FormSchema) {
-    console.log(values);
-  }
-
-  useEffect(() => console.log({ form: getValues() }, [getValues]))
-
-
   const pessoasObserver = watch("pessoaAssistida")
   const bairrosObserver = watch("bairro")
+
+  async function submitChamado(values: FormSchema) {
+    updatePessoaLoading(true)
+
+
+    await fetch(pessoasObserver.split(" ")[0])
+      .then(async (data) => {
+        updatePessoaLoading(false)
+        updateCadastroLoading(true)
+        const formData = {
+          ...values,
+          pessoaAssistidaId: String(data.data.dados.id) ?? "",
+          pessoaAssistida: {
+            ...data.data.dados
+          },
+          latitude: "-1",
+          longitude: "-1"
+        }
+
+        await submitCadastro(formData)
+          .then(() => {
+            toast.success("Chamado cadastrado com sucesso")
+            navigate("/chamados")
+          })
+          .catch((e) => {
+            if (e instanceof AxiosError) toast.error(e.response?.data.mensagem ?? e.message)
+          })
+      })
+      .catch((e) => { if (e instanceof AxiosError) toast.error(e.response?.data.mensagem ?? e.message) })
+      .finally(() => { updateCadastroLoading(false); updatePessoaLoading(false) })
+
+  }
 
   return (
     <form
       className="size-full flex flex-col gap-4"
       onSubmit={handleSubmit(submitChamado)}
     >
-      <div className="w-full grid grid-cols-3 gap-3">
-        <div className="grid gap-2 col-span-2">
+      <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div className="grid gap-2 col-span-1 md:col-span-2">
           <Label>Pessoa Assistida</Label>
-          {isLoadingPessoas && !pessoas && <Skeleton className="w-[100px]" />}
+          {isLoadingPessoas && !pessoas && <Skeleton className="w-full" />}
           {pessoasError && !pessoas && <p className="text-destructive font-semibold">{pessoasError.message}</p>}
           {pessoas &&
             <Select
               options={pessoas.dados.map((pessoa) => { return { value: pessoa.descricao, label: pessoa.descricao } })}
-              value={pessoasObserver ?? pessoas.dados[0].descricao}
+              placeholder="Escolhe uma pessoa"
+              value={pessoasObserver ?? ""}
               onSelect={(value) => setValue("pessoaAssistida", String(value))}
               {...register("pessoaAssistida")}
             />
@@ -68,14 +101,15 @@ export default function ChamadoForm() {
         </div>
 
 
-        <div className="grid gap-2 col-span-2">
+        <div className="grid gap-2 col-span-1 md:col-span-2">
           <Label>Bairro</Label>
-          {isLoadingBairros && !bairros && <Skeleton className="w-[100px]" />}
+          {isLoadingBairros && !bairros && <Skeleton className="w-full" />}
           {bairrosError && !bairros && <p className="text-destructive font-semibold">{bairrosError.message}</p>}
           {bairros &&
             <Select
               options={bairros.dados.map((bairro) => { return { value: bairro.descricao, label: bairro.descricao } })}
-              value={bairrosObserver ?? bairros.dados[0].descricao}
+              placeholder="Escolhe um bairro"
+              value={bairrosObserver ?? ""}
               onSelect={(value) => setValue("bairro", String(value))}
               {...register("bairro")}
             />
@@ -113,7 +147,11 @@ export default function ChamadoForm() {
           <FormError errMessage={errors.estado?.message} />
         </div>
       </div>
-      <Button type="submit">Enviar</Button>
+      <Button type="submit" disabled={isLoadingPessoa || isLoading}>
+        {isLoadingPessoa && !isLoading && "Verificando pessoa..."}
+        {isLoading && !isLoadingPessoa && "Cadastrando chamado..."}
+        {!isLoading && !isLoadingPessoa && "Cadastrar"}
+      </Button>
     </form>
   );
 }
