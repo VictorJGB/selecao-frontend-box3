@@ -38,7 +38,7 @@ export default function LoginForm() {
     await submitLogin(values.email, values.password)
       .then(() => {
         toast.success("Login realizado com sucesso")
-        navigate("/")
+        navigate("/chamados")
       })
       .catch((e) => {
         toast.error(e.message)

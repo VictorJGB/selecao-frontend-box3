@@ -31,19 +31,19 @@ export default function Select({
     <div className={cn("relative inline-block text-left", className)}>
       <button
         type="button"
-        className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+        className="inline-flex justify- text-start w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
         onClick={() => setIsOpen(!isOpen)}
       >
         {value}
         {isOpen ? (
-          <ChevronUp className="-mr-1 ml-2 h-5 w-5" />
+          <ChevronUp className="ml-auto h-5 w-5" />
         ) : (
-          <ChevronDown className="-mr-1 ml-2 h-5 w-5" />
+          <ChevronDown className="ml-auto h-5 w-5" />
         )}
       </button>
 
       {isOpen && (
-        <div className="origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+        <div className="origin-top-right absolute right-0 mt-2 w-full rounded-md shadow-lg bg-white ring-1 ring-primary ring-opacity- z-50 max-h-[150px] overflow-y-auto">
           <div
             className="py-1"
             role="menu"
