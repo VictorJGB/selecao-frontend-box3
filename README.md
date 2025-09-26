@@ -1,74 +1,51 @@
-# React + TypeScript + Vite
+# Guardia Maria - Seleção Front-End Box3
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esse projeto é uma aplicação frontend feita para o processo seletivo da Box3, interagindo com a Guardia Maria API.
 
-Currently, two official plugins are available:
+## Setup e Como Executar o projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Pré-requisitos
 
-## Expanding the ESLint configuration
+- Node.js (v18 ou maior)
+- npm
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 1. Variáveis de ambiente
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+A aplicação se conecta ao Guardia Maria API. Você precisa configurar a URL base da API em um arquivo de ambiente.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Cria um arquivo chamado `.env.local` na raiz do projeto e adicione a seguinte variável:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+VITE_API_URL=https://beta.guardia-api.box3.work/api
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Instalação
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Instale as dependências do projeto
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
-## Challenge Info
 
-- GUARDIA MARIA API DOCS: https://beta.guardia-api.box3.work/swagger/index.html
-- GUARDIA MARIA API URL: https://beta.guardia-api.box3.work/api
-- CHALLENGE INSTRUCTIONS: https://profuse-skull-802.notion.site/Sele-o-Front-End-Box3-GuardiaMaria-API-21dd2a42d51480e6b5e4c547258441ff
+### 3. Executando o servidor de desenvolvimento
+
+Para iniciar o servidor de desenvolvimento local, execute:
+
+```bash
+npm run dev
+```
+
+A aplicação estará disponível em **http://localhost:5173** por padrão.
+
+## Escolhas técnicas
+
+Este projeto foi construído com uma pilha moderna e eficiente, com foco na experiência e no desempenho do desenvolvedor.
+
+-   **Vite:** Uma ferramenta de front-end de última geração que fornece um servidor de desenvolvimento extremamente rápido e um processo de construção otimizado.
+-   **React:** Uma biblioteca declarativa e baseada em componentes para criar interfaces de usuário.
+-   **TypeScript:** Adiciona tipagem estática ao JavaScript, melhorando a qualidade e a manutenção do código ao detectar erros durante o desenvolvimento.
+-   **Tailwind CSS:** Uma estrutura CSS voltada para utilitários que permite o desenvolvimento rápido de interface do usuário diretamente na marcação, evitando a necessidade de arquivos CSS separados.
+-   **React Router:** A biblioteca padrão para roteamento no React, permitindo navegação e composição de visualizações.
+-   **Axios:** Um cliente HTTP baseado em promessa para fazer solicitações à API de backend.
+
+---
