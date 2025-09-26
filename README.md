@@ -47,5 +47,9 @@ Este projeto foi construído com uma pilha moderna e eficiente, com foco na expe
 -   **Tailwind CSS:** Uma estrutura CSS voltada para utilitários que permite o desenvolvimento rápido de interface do usuário diretamente na marcação, evitando a necessidade de arquivos CSS separados.
 -   **React Router:** A biblioteca padrão para roteamento no React, permitindo navegação e composição de visualizações.
 -   **Axios:** Um cliente HTTP baseado em promessa para fazer solicitações à API de backend.
+-   **React Hook Form:** Uma biblioteca voltada para gerenciamento de formulários de forma robusta e escalável.
+-   **Zod:** Uma biblioteca voltada para a criação de esquemas de validação de dados.
+-   **React Toastify:** Bibliotece voltada para a exibição de toasts a fim de proporcionar um feedback visual melhorado ao usuário.
+-   **Lucide Icons:** Uma biblioteca de ícones com design moderno, amigável ao usuário e de fácil integração.
 
 ---
