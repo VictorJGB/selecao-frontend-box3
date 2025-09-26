@@ -7,6 +7,7 @@ import ChamadosPage from "../pages/chamados";
 import InfoChamadoPage from "../pages/chamados/info-chamado";
 import NovoChamadoPage from "../pages/chamados/novo-chamado";
 import LoginPage from "../pages/login";
+import NotFoundPage from "../pages/not-found";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 
